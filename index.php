@@ -57,6 +57,13 @@
     </head>
     <body>
 
+            <form>
+            <label for="parking">Parking</label>
+            <input type="checkbox" name="parking">
+            <input type="submit" value="FILTER">
+
+            </form>
+
         <table class="table table-bordered ">
         <thead>
             <tr>
@@ -72,7 +79,12 @@
             
             
 
-            <?php 
+            <?php
+
+            $parkingFilter = $_GET["parking"] ?? false;
+
+
+
                 foreach($hotels as $hotel) {
                     $name = $hotel["name"];
                     $description = $hotel["description"];
@@ -80,14 +92,18 @@
                     $vote = $hotel["vote"];
                     $distance_to_center = $hotel["distance_to_center"];
 
-                    echo "<tr>";
-                    echo "<th scope='row'></th>";
-                    echo "<td>" . $name . "</td>";
-                    echo "<td>" . $description . "</td>";
-                    echo "<td>" . $parking . "</td>";
-                    echo "<td>" . $vote . "</td>";
-                    echo "<td>" . $distance_to_center . "</td>";
-                    echo "</tr>";
+                    if (!$parkingFilter || ($parkingFilter && $parking)) {
+
+                        echo "<tr>";
+                        echo "<th scope='row'></th>";
+                        echo "<td>" . $name . "</td>";
+                        echo "<td>" . $description . "</td>";
+                        echo "<td>" . ($parking ? "YES" : "NO") . "</td>";
+                        echo "<td>" . $vote . "</td>";
+                        echo "<td>" . $distance_to_center . "</td>";
+                        echo "</tr>";
+
+                    };
                     
                 };
             ?>
