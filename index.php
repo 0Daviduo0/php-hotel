@@ -60,6 +60,8 @@
             <form>
             <label for="parking">Parking</label>
             <input type="checkbox" name="parking">
+            <label for="vote"></label>
+            <input type="text" name="vote">
             <input type="submit" value="FILTER">
 
             </form>
@@ -82,6 +84,7 @@
             <?php
 
             $parkingFilter = $_GET["parking"] ?? false;
+            $voteFilter = $_GET["vote"] ?? 0;
 
 
 
@@ -92,7 +95,7 @@
                     $vote = $hotel["vote"];
                     $distance_to_center = $hotel["distance_to_center"];
 
-                    if (!$parkingFilter || ($parkingFilter && $parking)) {
+                    if ($vote >= $voteFilter && (!$parkingFilter || ($parkingFilter && $parking))) {
 
                         echo "<tr>";
                         echo "<th scope='row'></th>";
@@ -100,7 +103,7 @@
                         echo "<td>" . $description . "</td>";
                         echo "<td>" . ($parking ? "YES" : "NO") . "</td>";
                         echo "<td>" . $vote . "</td>";
-                        echo "<td>" . $distance_to_center . "</td>";
+                        echo "<td>" . $distance_to_center . " Km" . "</td>";
                         echo "</tr>";
 
                     };
