@@ -52,6 +52,9 @@
 
             ];
 
+            $parkingFilter = $_GET["parking"] ?? false;
+            $voteFilter = $_GET["vote"] ?? 0;
+
         ?>
 
     </head>
@@ -59,9 +62,16 @@
 
             <form>
             <label for="parking">Parking</label>
-            <input type="checkbox" name="parking">
+            <input type="checkbox" name="parking"
+
+            <?php
+                if ($parkingFilter) {
+                    echo " checked";
+                }
+            ?>
+            >
             <label for="vote"></label>
-            <input type="text" name="vote">
+            <input type="number" name="vote">
             <input type="submit" value="FILTER">
 
             </form>
@@ -82,9 +92,6 @@
             
 
             <?php
-
-            $parkingFilter = $_GET["parking"] ?? false;
-            $voteFilter = $_GET["vote"] ?? 0;
 
 
 
